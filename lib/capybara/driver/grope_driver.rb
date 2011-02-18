@@ -160,3 +160,8 @@ JS
     rack_server.url(path)
   end
 end
+
+Capybara.register_driver :grope do |app|
+  Capybara::Driver::Grope.new(app)
+end
+
