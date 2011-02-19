@@ -111,7 +111,8 @@ JS
     @app = app
     @rack_server = Capybara::Server.new(@app)
     @rack_server.boot if Capybara.run_server
-    @grope = Grope::Env.new
+
+    init_grope
   end
 
   def visit(path)
@@ -141,6 +142,10 @@ JS
 
   def wait?; true; end
 
+  def reset!
+    init_grope
+  end
+
   def evaluate_script(script)
     @grope.eval('return %s' % script)
   end
@@ -149,6 +154,10 @@ JS
 
   def url(path)
     rack_server.url(path)
+  end
+
+  def init_grope
+    @grope = Grope::Env.new
   end
 end
 
