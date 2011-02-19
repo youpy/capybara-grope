@@ -53,18 +53,9 @@ class Capybara::Driver::Grope < Capybara::Driver::Base
 Grope.dd = function(draggable, droppable) {
     var dispatchMouseEvent = function(e, type, dst) {
         var evt = document.createEvent('MouseEvents');
-        var pos = getElementPosition(dst);
+        var pos = dst.getBoundingClientRect();
         evt.initMouseEvent(type, true, true, window, 0, 0, 0, pos.left, pos.top, false, false, false, false, 0, null);
         e.dispatchEvent(evt);
-    };
-    var getElementPosition = function(elem) {
-        var position = elem.getBoundingClientRect();
-        return {
-            left: Math.round(window.scrollX+position.left),
-            top: Math.round(window.scrollY+position.top),
-            width: elem.clientWidth,
-            height: elem.clientHeight
-        };
     };
 
     dispatchMouseEvent(draggable, 'mousedown', draggable);
