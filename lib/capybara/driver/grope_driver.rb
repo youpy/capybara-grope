@@ -136,6 +136,10 @@ JS
     response.headers
   end
 
+  def status_code
+    raise Capybara::NotSupportedByDriverError
+  end
+
   def find(selector)
     @grope.all(selector).map { |node| Node.new(self, node) }
   end
