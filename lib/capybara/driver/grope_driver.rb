@@ -49,22 +49,9 @@ class Capybara::Driver::Grope < Capybara::Driver::Base
     end
 
     def drag_to(element)
-      js = driver.grope.eval(<<JS)
-Grope.dd = function(draggable, droppable) {
-    var dispatchMouseEvent = function(e, type, dst) {
-        var evt = document.createEvent('MouseEvents');
-        var pos = dst.getBoundingClientRect();
-        evt.initMouseEvent(type, true, true, window, 0, 0, 0, pos.left, pos.top, false, false, false, false, 0, null);
-        e.dispatchEvent(evt);
-    };
-
-    dispatchMouseEvent(draggable, 'mousedown', draggable);
-    dispatchMouseEvent(draggable, 'mousemove', droppable);
-    dispatchMouseEvent(draggable, 'mouseup', droppable);
-};
-return Grope;
-JS
-      js.dd(self.native, element.native)
+      js._dispatchMouseEvent(native, 'mousedown', native);
+      js._dispatchMouseEvent(native, 'mousemove', element.native);
+      js._dispatchMouseEvent(native, 'mouseup', element.native);
     end
 
     def tag_name

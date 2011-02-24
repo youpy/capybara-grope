@@ -18,7 +18,7 @@ GEM
     ffi (0.6.3)
       rake (>= 0.8.7)
     git (1.2.5)
-    grope (0.0.4)
+    grope (0.1.2)
       mechanize (>= 1.0.0)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
@@ -61,7 +61,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.0)
   capybara
-  grope
+  grope (>= 0.1.2)
   jeweler (~> 1.5.2)
   rcov
   rspec (~> 2.3.0)
